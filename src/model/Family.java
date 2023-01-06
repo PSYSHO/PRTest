@@ -1,39 +1,90 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
+import files.FileWorker;
 
-public class Family {
-    List<Human> humans;
+import java.io.Serializable;
+import java.util.*;
 
-    public Family(){
-        humans = new ArrayList<>();
-        addHuman(new Human("dad",FamilyRole.Father));
+public class Family implements Serializable {
+    private FileWorker fileWorker;
+    private List<Human> humans;
+
+    public Family(List<Human> humans) {
+        this.humans = humans;
+        this.fileWorker = new FileWorker();
     }
 
-    public void addHuman(Human human){
-        humans.add(human);
+    public Family() {
+        this.fileWorker = new FileWorker();
+        humans = new ArrayList<Human>();
     }
 
-    public Human findHuman(String name){
-        for (int i = 0; i < humans.size(); i++) {
-            if(humans.get(i).name == name){
-                return humans.get(i);
+    public void add(Human human) {
+        if (human != null) {
+            humans.add(human);
+            if (human.getFather() != null) {
+                human.getFather().getChildrens().add(human);
+            }
+            if (human.getMother() != null) {
+                human.getMother().getChildrens().add(human);
             }
         }
-        return null;
     }
-    public String whatDo(Human myHuman){
-        if(myHuman.familyRole== FamilyRole.Father){
-            return ((Human)myHuman).Job();
+
+    public List<String> getBrotherAndSister(String name) {
+        Set<String> uniq_name = new HashSet<>(sortFatherandMather(name));
+        List<String> res = new ArrayList<>(uniq_name);
+        res.remove(name);
+        if (res.isEmpty()) {
+            res.add("нет братьев или сестер");
         }
-        else if(myHuman.familyRole== FamilyRole.Mather){
-            return ((Human)myHuman).Job();
+        return res;
+    }
+
+    public List sortFatherandMather(String name) {
+        List<String> humans = new ArrayList<>();
+        Human find = findHumanForName(name);
+        if (find.getFather() != null && find.getFather().getChildrens() != null) {
+            for (Human child : find.getFather().getChildrens()) {
+                humans.add(child.getName());
+            }
         }
-        else if (myHuman.familyRole== FamilyRole.Child){
-            return((Human)myHuman).Job();
+        if (find.getMother() != null && find.getMother().getChildrens() != null) {
+            for (Human child : find.getMother().getChildrens()) {
+                humans.add(child.getName());
+            }
         }
-        return null;
+        return humans;
+    }
+
+
+    public Human findHumanForName(String name) {
+        Human find = null;
+        for (Human human : humans) {
+            if (human.getName().contains(name)) {
+                find = human;
+            }
+        }
+        return find;
+    }
+
+    public void save() {
+        fileWorker.save(this);
+    }
+
+    public void setFileHandler(FileWorker fileWorker) {
+        this.fileWorker = fileWorker;
+    }
+
+    public Family read() {
+        return (Family) fileWorker.read();
+    }
+
+    @Override
+    public String toString() {
+        return "Family{" +
+                "humans=" + humans +
+                '}';
     }
 }
 

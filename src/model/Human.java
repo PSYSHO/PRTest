@@ -1,23 +1,79 @@
 package model;
 
-public class Human {
-    String name;
-    FamilyRole familyRole;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-    public Human(String name){
+public class Human implements Serializable {
+    private String name;
+    //private FamilyRole familyRole;
+    private int yearBirth;
+    private Human father;
+    private Human mother;
+    private List<Human> childrens;
+
+    public Human(String name) {
         this.name = name;
     }
 
-    public Human(String name, FamilyRole familyRole) {
+    public Human(String name, int yearBirth, Human father, Human mother) {
         this.name = name;
-        this.familyRole = familyRole;
+        this.yearBirth = yearBirth;
+        this.father = father;
+        this.mother = mother;
+        childrens = new ArrayList<Human>();
     }
 
-    public String getName(){
+    public Human(String name, int yearBirth, Human father, Human mother, List<Human> childrens) {
+        this.name = name;
+        //  this.familyRole = familyRole;
+        this.yearBirth = yearBirth;
+        this.father = father;
+        this.mother = mother;
+        this.childrens = childrens;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getYearBirth() {
+        return yearBirth;
+    }
+
+    public void setYearBirth(int yearBirth) {
+        this.yearBirth = yearBirth;
+    }
+
+    public Human getFather() {
+        return father;
+    }
+
+    public void setFather(Human father) {
+        this.father = father;
+    }
+
+    public Human getMother() {
+        return mother;
+    }
+
+    public void setMother(Human mother) {
+        this.mother = mother;
+    }
+
+    public List<Human> getChildrens() {
+        return childrens;
+    }
+
+    public void setChildrens(List<Human> childrens) {
+        this.childrens = childrens;
+    }
+
+    public String getName() {
         return this.name;
     }
 
-    public FamilyRole getFamilyRole() {
+    /*public FamilyRole getFamilyRole() {
         return familyRole;
     }
 
@@ -29,5 +85,22 @@ public class Human {
         else if (familyRole==FamilyRole.Mather)return "Готовить еду и смотреть сериальчики";
         else if(familyRole==FamilyRole.Child)return "Смотреть мультики и учиться";
         return "Who is YOU?";
+    }*/
+
+
+    @Override
+    public String toString() {
+
+        String str = "Human{" +
+                "name='" + name + '\'' +
+                ", yearBirth=" + yearBirth;
+        if (father != null) {
+            str = str + ", father: " + father.getName();
+        }
+        if (mother != null) {
+            str = str + ", mother: " + mother.getName();
+        }
+        str = str + '}';
+        return str;
     }
 }

@@ -33,7 +33,7 @@ public class Family implements Serializable,Iterable<Human>{
     }
 
     public List<String> getBrotherAndSister(String name) {
-        Set<String> uniq_name = new HashSet<>(sortFatherandMather(name));
+        Set<String> uniq_name = new HashSet<>(sortBrotherAndSister(name));
         List<String> res = new ArrayList<>(uniq_name);
         res.remove(name);
         if (res.isEmpty()) {
@@ -42,7 +42,7 @@ public class Family implements Serializable,Iterable<Human>{
         return res;
     }
 
-    public List sortFatherandMather(String name) {
+    public List sortBrotherAndSister(String name) {
         List<String> humans = new ArrayList<>();
         Human find = findHumanForName(name);
         if (find.getFather() != null && find.getFather().getChildrens() != null) {

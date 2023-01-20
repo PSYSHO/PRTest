@@ -4,15 +4,26 @@ import interfaces.UserInterface;
 import model.FamilyTree;
 import model.Human;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleInterface implements UserInterface {
     private FamilyTree familyTree;
+    private List<String> comand;
 
     private Scanner in = new Scanner(System.in);
 
     public ConsoleInterface(){
+        comand = new ArrayList<String>();
+        comand.add("Выберите действие которое хотите сделать");
+        comand.add("1)Создать семью");
+        comand.add("2)выполнить сортировку семьи по году рождения");
+        comand.add("3)выполнить сортировку семьи по имени");
+        comand.add("4)вывести брата и сестру");
+        comand.add("5)вывести в файл");
+        comand.add("6)считать из файла");
+        comand.add("7)Вывести семью");
     }
 
     public ConsoleInterface(FamilyTree familyTree, Scanner in) {
@@ -28,14 +39,14 @@ public class ConsoleInterface implements UserInterface {
 
     @Override
     public void menu() {
-        System.out.println("Выберите действие которое хотите сделать");
-        System.out.println("1)Создать семью");
-        System.out.println("2)выполнить сортировку семьи по году рождения");
-        System.out.println("3)выполнить сортировку семьи по имени");
-        System.out.println("4)вывести брата и сестру");
-        System.out.println("5)вывести в файл");
-        System.out.println("6)считать из файла");
-        System.out.println("7)Вывести семью");
+        System.out.println(comand.get(0));
+        System.out.println(comand.get(1));
+        System.out.println(comand.get(2));
+        System.out.println(comand.get(3));
+        System.out.println(comand.get(4));
+        System.out.println(comand.get(5));
+        System.out.println(comand.get(6));
+        System.out.println(comand.get(7));
         int number = in.nextInt();
         switch (number){
             case 1:

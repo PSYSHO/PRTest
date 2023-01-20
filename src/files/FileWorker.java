@@ -1,7 +1,7 @@
 package files;
 
 import interfaces.FileWorkerI;
-import model.Family;
+import model.FamilyTree;
 
 import java.io.*;
 
@@ -19,7 +19,7 @@ public class FileWorker implements FileWorkerI,Serializable {
     @Override
     public Object read() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("family.txt"))) {
-            return (Family) ois.readObject();
+            return (FamilyTree) ois.readObject();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

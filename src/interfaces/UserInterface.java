@@ -1,6 +1,6 @@
 package interfaces;
 
-import model.Family;
+import model.FamilyTree;
 
 import java.util.List;
 
@@ -9,11 +9,11 @@ public interface UserInterface {
 
     void menu();
 
-    Family createFamily();
+    FamilyTree createFamily();
 
-    void sortByName(Family family);
+    void sortByName(FamilyTree familyTree);
 
-    void sortByAge(Family family);
+    void sortByAge(FamilyTree familyTree);
 
     List getBrotherAndSister(String name);
 }

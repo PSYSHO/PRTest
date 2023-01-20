@@ -3,6 +3,7 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Human implements Serializable,Comparable<Human> {
     private String name;
@@ -102,6 +103,19 @@ public class Human implements Serializable,Comparable<Human> {
         }
         str = str + '}';
         return str;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Human human = (Human) o;
+        return yearBirth == human.yearBirth && Objects.equals(name, human.name) && Objects.equals(father, human.father) && Objects.equals(mother, human.mother) && Objects.equals(childrens, human.childrens);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, yearBirth, father, mother, childrens);
     }
 
     @Override

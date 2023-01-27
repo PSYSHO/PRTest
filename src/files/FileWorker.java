@@ -1,15 +1,15 @@
 package files;
 
-import interfaces.FileWorkerI;
+import interfaces.InterfaceWorkFile;
 import model.FamilyTree;
 
 import java.io.*;
 
-public class FileWorker implements FileWorkerI,Serializable {
+public class FileWorker implements InterfaceWorkFile,Serializable {
     @Override
-    public void save(Serializable serializable) {
+    public void save(FamilyTree familyTree) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("family.txt"))) {
-            oos.writeObject(serializable);
+            oos.writeObject(familyTree);
             System.out.println("Saved");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -17,7 +17,7 @@ public class FileWorker implements FileWorkerI,Serializable {
     }
 
     @Override
-    public Object read() {
+    public FamilyTree read() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("family.txt"))) {
             return (FamilyTree) ois.readObject();
         } catch (Exception ex) {

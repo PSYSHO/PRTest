@@ -1,8 +1,8 @@
-import utils.ConsoleInterface;
+import utils.ConsoleInterfaceUser;
 
 public class Test {
    public static void main(String[] args){
-       ConsoleInterface consoleInterface = new ConsoleInterface();
+       ConsoleInterfaceUser consoleInterface = new ConsoleInterfaceUser();
        consoleInterface.start();
    }
 }

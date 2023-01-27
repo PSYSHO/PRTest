@@ -42,7 +42,7 @@ public class FamilyTree implements Serializable,Iterable<Human>{
         return res;
     }
 
-    public List sortBrotherAndSister(String name) {
+    public List<String> sortBrotherAndSister(String name) {
         List<String> humans = new ArrayList<>();
         Human find = findHumanForName(name);
         if (find.getFather() != null && find.getFather().getChildrens() != null) {
@@ -77,16 +77,8 @@ public class FamilyTree implements Serializable,Iterable<Human>{
         return find;
     }
 
-    public void save() {
-        fileWorker.save(this);
-    }
-
     public void setFileWorker(FileWorker fileWorker) {
         this.fileWorker = fileWorker;
-    }
-
-    public FamilyTree read() {
-        return (FamilyTree) fileWorker.read();
     }
 
     public List<Human> getHumans() {

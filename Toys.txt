@@ -1,0 +1,4 @@
+Toy{id=3, name='Барабан', price=150.0, weight=65.0, quntity=1}
+Toy{id=2, name='Пистолет', price=400.0, weight=83.0, quntity=1}
+Toy{id=1, name='Машинка', price=200.0, weight=50.0, quntity=2}
+Toy{id=0, name='Меч', price=124.0, weight=15.0, quntity=1}
